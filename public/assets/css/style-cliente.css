@@ -1,0 +1,107 @@
+/* Estilo para o modal */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Container da tabela */
+.tabela-container {
+    width: 80%;
+    margin: 20px auto;
+    overflow-x: auto; /* Adiciona rolagem horizontal se necessário */
+}
+
+/* Estilização da tabela */
+.tabela-clientes {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: Arial, sans-serif;
+}
+
+/* Cabeçalho da tabela */
+.tabela-clientes thead {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* Linhas da tabela */
+.tabela-clientes th, .tabela-clientes td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Alternar cores das linhas para melhorar a leitura */
+.tabela-clientes tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover ao passar o mouse */
+.tabela-clientes tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* Mensagem quando não há clientes */
+.msg-vazio {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+}
+
+/* Estilo do menu de abas */
+.abas {
+    display: flex;
+    border-bottom: 2px solid #007BFF;
+    margin-bottom: 20px;
+}
+
+.aba {
+    background: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.aba:hover {
+    background: #ddd;
+}
+
+/* Aba ativa */
+.aba.ativa {
+    background: #007BFF;
+    color: white;
+    font-weight: bold;
+}
+
+/* Conteúdo das abas */
+.aba-conteudo {
+    display: none;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Mostrar apenas a aba ativa */
+.aba-conteudo.ativa {
+    display: block;
+}

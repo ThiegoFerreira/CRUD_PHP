@@ -24,7 +24,7 @@ class Database{
             
             $this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-            echo "Conectado com sucesso";
+            // echo "Conectado com sucesso";
         
         }
         catch(PDOException $err){
@@ -74,15 +74,30 @@ class Database{
 
 
     //Função para selecionar (select) dados do db:______________________________________
-    public function select($where = null, $order = null, $limit = null, $fields = '*'){
-        $where = strlen($where) ? 'WHERE '.$where : '';
-        $order = strlen($order) ? 'ORDER BY '.$order : '';
-        $where = strlen($limit) ? 'LIMIT '.$limit : '';
+    // public function select($where = null, $order = null, $limit = null, $fields = '*'){
+    //     $where = strlen($where) ? 'WHERE '.$where : '';
+    //     $order = strlen($order) ? 'ORDER BY '.$order : '';
+    //     $where = strlen($limit) ? 'LIMIT '.$limit : '';
 
-        $query = 'SELECT '.$fields.' FROM '.$this->table.' '.$where;
+    //     $query = 'SELECT '.$fields.' FROM '.$this->table.' '.$where;
+    //     echo $query;
+    //     return $this->execute($query);
 
+    // }
+    public function select($where = null, $order = null, $limit = null, $fields = '*') {
+        // Verificar se o parâmetro $where não é vazio ou nulo antes de adicionar 'WHERE'
+        $where = $where ? 'WHERE '.$where : ''; // Verifica se $where tem valor válido
+        $order = $order ? 'ORDER BY '.$order : ''; // Verifica se $order tem valor válido
+        $limit = $limit ? 'LIMIT '.$limit : ''; // Verifica se $limit tem valor válido
+    
+        // Debug: veja o valor da consulta SQL antes de executá-la
+        // echo 'SELECT '.$fields.' FROM '.$this->table.' '.$where.' '.$order.' '.$limit;
+    
+        // Monta a consulta SQL
+        
+        $query = 'SELECT '.$fields.' FROM '.$this->table.' '.$where.' '.$order.' '.$limit;
+        // Execute a consulta
         return $this->execute($query);
-
     }
 
 
