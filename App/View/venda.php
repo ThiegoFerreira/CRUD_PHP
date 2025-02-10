@@ -1,6 +1,30 @@
 <?php
-    require '../Controller/Venda.php';
+require_once '../Controller/Pedido.php';
+require_once '../Controller/ItemPedido.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_usuario'])) {
+    try {
+        // Criar Pedido
+        $pedido = new Pedido($_POST['id_usuario']);
+        $pedido_id = $pedido->cadastrar();
+
+        // Adicionar Itens ao Pedido
+        foreach ($_POST['produto_id'] as $index => $produto_id) {
+            $quantidade = $_POST['quantidade'][$index];
+            $item = new ItemPedido($pedido_id, $produto_id, $quantidade);
+            $item->cadastrar();
+        }
+
+        header("Location: " . $_SERVER['PHP_SELF'] . "?sucesso=1");
+        exit();
+    } catch (Exception $e) {
+        echo "Erro: " . $e->getMessage();
+    }
+} else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    echo "Erro: ID do usuário não informado!";
+}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -8,113 +32,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Cadastro</title>
+    <title>Cadastrar Pedido</title>
 </head>
 <body>
-    <h2>NOVO PEDIDO</h2><br>
-    <form action="" method="post">
-        <label>Cliente:</label><br>
-        <input type="text" name="nome" id="" placeholder="Nome Completo."><br>
-        <label>Produto:</label><br>
-        <input type="text" name="nome" id="" placeholder="Nome Completo."><br>
-        <label>Quantidade:</label><br>
-        <input type="text" name="email" id="" placeholder="digite seu e-mail."><br>
-        <label>Valor:</label><br>
-        <input type="text" name="email" id="" placeholder="digite seu e-mail."><br>
-        <label>Vendedor:</label><br>
-        
+<?php if (isset($_GET['sucesso'])): ?>
+    <p style="color: green;">Pedido cadastrado com sucesso!</p>
+<?php endif; ?>
+    <h2>Cadastrar Pedido</h2>
+    <form action="venda.php" method="post">
+        <label>Cliente ID:</label><br>
+        <input type="number" name="id_usuario" required><br><br>
 
-        <input type="submit" value="Cadastrar">
+        <h3>Itens do Pedido</h3>
+        <div id="itens-container">
+            <div class="item">
+                <label>Produto ID:</label>
+                <input type="number" name="produto_id[]" required>
+                
+                <label>Quantidade:</label>
+                <input type="number" name="quantidade[]" required min="1">
+            </div>
+        </div>
+
+        <button type="button" onclick="adicionarItem()">Adicionar Item</button><br><br>
+
+        <input type="submit" value="Cadastrar Pedido">
     </form>
-    <h2>EDITAR PEDIDO</h2><br>
-    <form action="" method="post">
-        <label>ID do Cadastro:</label><br>
-        <input type="text" name="nome" id="" placeholder="Informe o ID do usuário a ser editado"><br>
-        <label>Nome:</label><br>
-        <input type="text" name="nome" id="" placeholder="Nome Completo."><br>
-        <label>Descrição:</label><br>
-        <input type="email" name="email" id="" placeholder="digite seu e-mail."><br>
-        <label>Quantidade:</label><br>
-        <input type="text" name="senha" id="" placeholder="Digite sua senha."><br>
-        <label>Valor Unitário:</label><br>
-        <input type="text" name="confSenha" id="" placeholder="Confirme sua Senha"><br><br>
 
-        <input type="submit" value="Salvar">
-    </form>
-    <h2>EXCLUIR PEDIDO</h2><br>
-    <form action="" method="post">
-        <label>ID do Cadastro:</label><br>
-        <input type="text" name="nome" id="" placeholder="ID a ser excluído."><br>
-        
-
-        <input type="submit" value="Cadastrar">
-    </form>
-    <h2>LISTAR PEDIDOS</h2><br>
-    <form action="" method="post">
-        
-        
-        <input type="submit" value="Listar">
-    </form>    
-
-    <?php
-
-        if(isset($_POST['nome']))
-        {
-            $nome = $_POST['nome'];
-            $email = $_POST['email'];
-            $senha = $_POST['senha'];
-            $confSenha = addslashes($_POST['confSenha']);
-
-            $usuario = new Usuario();
-            $usuario->nome = $nome;
-            $usuario->email = $email;
-            $usuario->senha = $senha;
-
-            if(!empty($nome) && !empty($email) && !empty($senha) && !empty($confSenha))
-            {
-               
-                if($senha == $confSenha)
-                {
-                    if($usuario->cadastrar())
-                    {
-                        ?>
-                            <!-- bloco de HTML -->
-                            <div class="msg-sucesso">
-                                <p>Cadastrado com Sucesso</p>
-                                <p>Clique <a href="../../index.php">aqui</a>para logar.</p>
-                            </div>
-                        <?php
-                    }
-                    else
-                    {
-                        ?>
-                        <div class="msg_erro">
-                            <p>Email já cadastrado.</p>
-                        </div>
-                        <?php 
-                        }
-                }
-                else
-                {
-                    ?>
-                    <div class="msg_erro">
-                        <p>Senhas não conferem.</p>
-                    </div>
-                    <?php
-                }
-               
-            }
-            else
-            {
-                ?>
-                    <div class="msg-erro">
-                        <p>Preencha todos os campos.</p>
-                    </div>
-                <?php
-            }
-        
+    <script>
+        function adicionarItem() {
+            let container = document.getElementById("itens-container");
+            let div = document.createElement("div");
+            div.classList.add("item");
+            div.innerHTML = `
+                <label>Produto ID:</label>
+                <input type="number" name="produto_id[]" required>
+                
+                <label>Quantidade:</label>
+                <input type="number" name="quantidade[]" required min="1">
+                
+                <button type="button" onclick="removerItem(this)">Remover</button>
+            `;
+            container.appendChild(div);
         }
-    ?>
+
+        function removerItem(button) {
+            button.parentElement.remove();
+        }
+    </script>
 
 </body>
 </html>
