@@ -1,5 +1,4 @@
 <?php
-
 require  '../Model/Database.php';
 
 class Produto{
@@ -7,7 +6,8 @@ class Produto{
     public int $id_produto;
     public string $nome;
     public string $descricao;
-    public string $valor;
+    public int $quantidade;
+    public float $valor;
 
     public function cadastrar(){
         //O comando abaixo instancia o banco e conecta com a tabela nele
@@ -18,6 +18,7 @@ class Produto{
             [
                 'nome'=>$this->nome,
                 'descricao'=>$this->descricao,
+                'quantidade'=>$this->quantidade,
                 'valor'=>$this->valor,
             ]
             );
@@ -27,7 +28,7 @@ class Produto{
     public function buscar($where = null,$order = null,$limit = null){
         $db = new Database('produto'); 
 
-        $res = $db->select($where,$order,$limit)->fetchAll(PDO::FETCH_CLASS,self::class);
+        $res = $db->select($where,$order,$limit)->fetchAll(PDO::FETCH_ASSOC);
         return  $res;
        
     }
@@ -45,6 +46,7 @@ class Produto{
             [
                 "nome" => $this->nome,
                 "descricao" => $this->descricao,
+                "quantidade" => $this->quantidade,
                 "valor" => $this->valor,
             ]
             );
@@ -57,7 +59,7 @@ class Produto{
         $db = new Database('produto');
         $where = 'id_produto ='.$this->id_produto;//Instanciar o objeto com o ID de quem vai ser deletado
         $res = $db->delete($where); //Delete chamando a classe where que chamou o ID a ser deletado
-        return $res->rowCount();
+        return $db->delete($where);
     }
 
 }

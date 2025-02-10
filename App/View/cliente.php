@@ -213,7 +213,7 @@
         <label>Nome:</label><br>
         <input type="text" name="nome" id="" placeholder="Nome Completo."><br>
         <label>Email:</label><br>
-        <input type="email" name="email" id="" placeholder="digite seu e-mail."><br>
+        <input type="email" name="email" id="" placeholder="Digite seu e-mail."><br>
         <label>Senha:</label><br>
         <input type="password" name="senha" id="" placeholder="Digite sua senha."><br>
         <label>Confirmar Senha:</label><br>
@@ -243,7 +243,7 @@
         <input type="text" name="nome_editar" id="" placeholder="Nome Completo" value="<?php echo $nome_editar; ?>"><br>
 
         <label>Email:</label><br>
-        <input type="email" name="email_editar" id="" placeholder="digite seu e-mail." value="<?php echo $email_editar; ?>"><br>
+        <input type="email" name="email_editar" id="" placeholder="Digite seu e-mail." value="<?php echo $email_editar; ?>"><br>
 
         <label>Senha:</label><br>
         <input type="password" name="senha_editar" id="" placeholder="Digite sua senha." value="<?php echo $senha_editar; ?>"><br>
