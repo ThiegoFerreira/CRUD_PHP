@@ -140,71 +140,54 @@ button:hover {
     color: white;
 }
 
-/* Estilização da tabela */
-.tabela-container {
-    flex: 1;
-    position: fixed;
+/* Container das tabelas */
+.tabelas-container {  /* Novo container para englobar todas as tabelas */
+    display: flex;
+    flex-direction: column;
     width: 50%;
     margin-left: 40%;
+    height: 40vh; /* 2 tabelas com 20% cada (40% da tela total) */
+    gap: 10px; /* Espaço entre as tabelas */
 }
 
+/* Cada tabela ocupa 20% da tela */
+.tabela-container {
+    width: 100%;
+    height: 20vh; /* 20% da altura da tela */
+    overflow-y: auto; /* Permite rolagem se necessário */
+}
+
+/* Caixa da tabela */
 .tabela-box {
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
     backdrop-filter: blur(5px);
+    height: 100%; /* Garante que a tabela ocupe toda a altura do container */
 }
 
 /* Estilo da tabela */
 .tabela-clientes {
     width: 100%;
     border-collapse: collapse;
+    height: 100%;
 }
 
 .tabela-clientes th, .tabela-clientes td {
-    border: 1px solid #fda615; /* Mesma borda dos inputs */
+    border: 1px solid #fda615;
     padding: 10px;
     text-align: left;
     color: white;
 }
 
-/* Estilo do cabeçalho */
 .tabela-clientes th {
     background-color: rgba(42, 42, 42, 0.8);
     color: #fda615;
 }
 
-/* Linhas alternadas */
 .tabela-clientes tbody tr:nth-child(even) {
     background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Container das tabelas */
-.tabela-container {
-    width: 50%;           /* Define uma largura para as tabelas */
-    height: 20%;          /* Define altura fixa */
-    margin-left: 40%;     /* Mantém a posição */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* Caixa da tabela */
-.tabela-box {
-    height: 100%;         /* Mantém altura dentro do container */
-    overflow-y: auto;     /* Adiciona rolagem se necessário */
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-}
-
-/* Garantindo que as tabelas ocupem todo o espaço dentro do container */
-.tabela-clientes {
-    width: 100%;
-    height: 100%;
-    border-collapse: collapse;
-}
+    
 
 /* 📱 Responsividade */
 @media (max-width: 1024px) { /* Tablets */

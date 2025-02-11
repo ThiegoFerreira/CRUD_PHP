@@ -3,13 +3,16 @@
 require_once '../Model/Database.php';
 
 class Pedido {
-    public int $id_pedido;
-    public int $id_usuario;
+    public ?int $id_pedido = null;
+    public ?int $id_usuario = null;
     public string $status;
     public string $data_pedido;
 
-    public function __construct(int $id_usuario, string $status = 'pendente') {
-        $this->id_usuario = $id_usuario;
+    // Construtor agora permite instanciar sem parâmetros
+    public function __construct(?int $id_usuario = null, string $status = 'pendente') {
+        if ($id_usuario !== null) {
+            $this->id_usuario = $id_usuario;
+        }
         $this->status = $status;
     }
 

@@ -22,58 +22,29 @@
 
             if($produto->cadastrar())
             {
-                ?>
-                    <!-- bloco de HTML -->
-                    <div class="msg-sucesso">
-                        <p>Cadastrado com Sucesso</p>
-                    </div>
-                <?php
-            }          
+                echo "<script>
+                            alert('Cadastrado com sucesso!');
+                            window.location.href = window.location.href;
+                          </script>";
+            }  else {
+                echo "<script>
+                        alert('Erro.');
+                      </script>";
+            }        
         }
         else
         {
-            ?>
-                <div class="msg-erro">
-                    <p>Preencha todos os campos.</p>
-                </div>
-            <?php
+            echo "<script>
+                alert('Erro: Preencha todos os campos.');
+              </script>";
         }
     
     }
     //______________________LISTAR________________________________
 
-    if (isset($_POST['acao']) && $_POST['acao'] == 'Listar') {
-        $produto = new Produto();
-        $produtos = $produto->buscar(); // Obtém todos os clientes
-    
-        if (!empty($produtos)) {
-            echo "<div class='tabela-container'>"; // Div para controle da tabela
-            echo "<table class='tabela-produtos'>";
-            echo "<thead>";
-            echo "<tr>";
-            echo "<th>ID</th><th>Nome</th><th>Descrição</th><th>Quantidade</th><th>Valor</th>";
-            echo "</tr>";
-            echo "</thead>";
-            echo "<tbody>";
-    
-            foreach ($produtos as $prod) {
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars($prod['id_produto']) . "</td>";
-                echo "<td>" . htmlspecialchars($prod['nome']) . "</td>";
-                echo "<td>" . htmlspecialchars($prod['descricao']) . "</td>";
-                echo "<td>" . htmlspecialchars($prod['quantidade']) . "</td>";
-                echo "<td>" . htmlspecialchars($prod['valor']) . "</td>";
-                echo "</tr>";
-            }
-    
-            echo "</tbody>";
-            echo "</table>";
-            echo "</div>";
-        } else {
-            echo "<p class='msg-vazio'>Nenhum cliente encontrado.</p>";
-        }
-    }
 
+    $produto = new Produto();
+    $produtos = $produto->buscar(); // Obtém todos os clientes
      
     //____________________EDITAR___________________________
     $id_editar = $nome_editar = $descricao_editar = $quantidade_editar = $valor_editar = '';
@@ -119,25 +90,21 @@
 
                 // Chame a função de atualizar
                 if ($produto->atualizar()) {
-                    ?>
-                    <div class="msg-sucesso">
-                        <p>Cadastro atualizado com sucesso!</p>
-                    </div>
-                    <?php
+                    echo "<script>
+                            alert('Produto atualizado com sucesso!');
+                            window.location.href = window.location.href;
+                          </script>";
+                    exit();
                 } else {
-                    ?>
-                    <div class="msg-erro">
-                        <p>Erro ao atualizar cadastro. Tente novamente.</p>
-                    </div>
-                    <?php
+                    echo "<script>
+                            alert('Erro ao atualizar cadastro. Tente novamente.');
+                          </script>";
                 }
                 
             } else {
-                ?>
-                <div class="msg-erro">
-                    <p>Preencha todos os campos corretamente.</p>
-                </div>
-                <?php
+                echo "<script>
+                    alert('Preencha todos os campos corretamente.');
+                  </script>";
             }
         }
     }
@@ -155,17 +122,14 @@
     
         // Chama o método excluir da classe Usuario
         if ($produto->excluir() !==true) {
-            ?>
-            <div class="msg-sucesso">
-                <p>Usuário excluído com sucesso!</p>
-            </div>
-            <?php
+            echo "<script>
+                    alert('Produto excluído com sucesso!');
+                    window.location.href = window.location.href;
+                  </script>";
         } else {
-            ?>
-            <div class="msg-erro">
-                <p>Erro ao excluir o usuário. Tente novamente.</p>
-            </div>
-            <?php
+            echo "<script>
+                    alert('Erro ao excluir o Produto. Tente novamente.');
+                  </script>";
         }
     }
 
@@ -183,68 +147,114 @@
 </head>
 <body>
 
+    <div class="titulo-container">
+        <h2>CADASTRO DE PRODUTO</h2><br>
+    </div>
 
-    <h2>CADASTRO DE PRODUTO</h2><br>
-    <form action="" method="post">
-        <label>Nome:</label><br>
-        <input type="text" name="nome" id="" placeholder="Nome do produto."><br>
-        <label>Descrição:</label><br>
-        <input type="text" name="descricao" id="" placeholder="Digite uma breve descricão."><br>
-        <label>Quantidade:</label><br>
-        <input type="number" name="quantidade" id="" min = "0" placeholder="Digite a quantidade."><br>
-        <label>Valor:</label><br>
-        <input type="number" name="valor" id="" step ="0.01" placeholder="Digite o valor."><br>
-        
-        <input type="submit" value="Cadastrar">
-    </form>
+    <div class="conteudo">
+        <div class="container">
+            <h2>CADASTRAR NOVO PRODUTO</h2>
+            <div class="form-box">
+                <form action="" method="post">
+                    <label>Nome:</label><br>
+                    <input type="text" name="nome" id="" placeholder="Nome do produto."><br>
+                    <label>Descrição:</label><br>
+                    <input type="text" name="descricao" id="" placeholder="Digite uma breve descricão."><br>
+                    <label>Quantidade:</label><br>
+                    <input type="number" name="quantidade" id="" min = "0" placeholder="Digite a quantidade."><br>
+                    <label>Valor:</label><br>
+                    <input type="number" name="valor" id="" step ="0.01" placeholder="Digite o valor."><br>
+                    
+                    <input type="submit" value="Cadastrar">
+                </form>
+            </div>
 
-    <h2>LISTAR PRODUTOS</h2><br>
-    <form action="" method="post">      
-        <input type="submit" name="acao" value="Listar">
-    </form>  
+            <h2>EDITAR PRODUTO</h2>
+            <div class="form-box">
+                <form action="" method="post">
+                    <label>ID do Cadastro:</label><br>
+                    <input type="text" name="ID_editar" id="" placeholder="Informe o ID do cadastro" value="<?php echo $id_editar; ?>">
+                    <input type="submit" name="acao" value="Procurar"><br>
+
+                    <label>ID:</label><br>
+                    <input type="text" name="id_produto_editar" value="<?php echo $id_editar; ?>" readonly><br>
+
+                    <label>Nome:</label><br>
+                    <input type="text" name="nome_editar" id="" placeholder="Nome do Produto" value="<?php echo $nome_editar; ?>"><br>
+
+                    <label>Descrição:</label><br>
+                    <input type="text" name="descricao_editar" id="" placeholder="Digite uma breve descricao" value="<?php echo $descricao_editar; ?>"><br>
+
+                    <label>Quantidade:</label><br>
+                    <input type="number" name="quantidade_editar" id="" min = "0" placeholder="Digite a quantidade" value="<?php echo $quantidade_editar; ?>"><br>
+
+                    <label>Valor:</label><br>
+                    <input type="number" name="valor_editar" id="" min= "0" step ="0.01" placeholder="Digite o valor." value="<?php echo $valor_editar; ?>"><br>
+
+                    <input type="submit" name="acao" value="Salvar Alterações"><br>
+                    
+                </form>
+            </div>
 
 
-    <h2>EDITAR PRODUTO</h2><br>
-    <form action="" method="post">
-        <label>ID do Cadastro:</label><br>
-        <input type="text" name="ID_editar" id="" placeholder="Informe o ID do cadastro" value="<?php echo $id_editar; ?>">
-        <input type="submit" name="acao" value="Procurar"><br>
+            <h2>EXCLUIR PRODUTO</h2>
+            <div class="form-box">
+                <form id="form-excluir" action="" method="post">
+                    <label>ID do Cadastro:</label><br>
+                    <input type="text" name="id_excluir" id="id_excluir" placeholder="ID a ser excluído."><br>
+                    <input type="hidden" name="acao" value="Excluir">
+                    <button type="button" onclick="confirmarExclusao()">Excluir</button> 
+                </form>
 
-        <label>ID:</label><br>
-        <input type="text" name="id_produto_editar" value="<?php echo $id_editar; ?>" readonly><br>
+                <div id="modalConfirmacao" class="modal">
+                    <div class="modal-content">
+                        <p>Tem certeza que deseja excluir este produto?</p>
+                        <button onclick="executarExclusao()">Sim</button>
+                        <button onclick="fecharModal()">Não</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label>Nome:</label><br>
-        <input type="text" name="nome_editar" id="" placeholder="Nome do Produto" value="<?php echo $nome_editar; ?>"><br>
-
-        <label>Descrição:</label><br>
-        <input type="text" name="descricao_editar" id="" placeholder="Digite uma breve descricao" value="<?php echo $descricao_editar; ?>"><br>
-
-        <label>Quantidade:</label><br>
-        <input type="number" name="quantidade_editar" id="" min = "0" placeholder="Digite a quantidade" value="<?php echo $quantidade_editar; ?>"><br>
-
-        <label>Valor:</label><br>
-        <input type="number" name="valor_editar" id="" min= "0" step ="0.01" placeholder="Digite o valor." value="<?php echo $valor_editar; ?>"><br>
-
-        <input type="submit" name="acao" value="Salvar Alterações"><br>
-        
-    </form>
-
-
-    <h2>EXCLUIR CADASTRO</h2><br>
-    <form id="form-excluir" action="" method="post">
-        <label>ID do Cadastro:</label><br>
-        <input type="text" name="id_excluir" id="id_excluir" placeholder="ID a ser excluído."><br>
-        <input type="hidden" name="acao" value="Excluir">
-        <button type="button" onclick="confirmarExclusao()">Excluir</button> 
-    </form>
-
-    <div id="modalConfirmacao" class="modal">
-        <div class="modal-content">
-            <p>Tem certeza que deseja excluir este produto?</p>
-            <button onclick="executarExclusao()">Sim</button>
-            <button onclick="fecharModal()">Não</button>
+        <!-- Container da tabela -->
+        <div class="tabela-container">
+            <h2>LISTA DE PRODUTOS</h2>
+            <div class="tabela-box">
+                <table class="tabela-clientes">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOME</th>
+                            <th>DESCRIÇÃO</th>
+                            <th>QUANTIDADE</th>
+                            <th>VALOR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($produtos)): ?>
+                            <?php foreach ($produtos as $prod): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($prod['id_produto']) ?></td>
+                                    <td><?= htmlspecialchars($prod['nome']) ?></td>
+                                    <td><?= htmlspecialchars($prod['descricao']) ?></td>
+                                    <td><?= htmlspecialchars($prod['quantidade']) ?></td>
+                                    <td><?= htmlspecialchars($prod['valor']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="3" class="msg-vazio">Nenhum cliente encontrado.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+
+
+
 
       
      <script src="../../public/js/modal-confirmacao.js"></script>
