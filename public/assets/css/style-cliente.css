@@ -1,6 +1,118 @@
-/* Estilo para o modal */
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Fundo da página */
+body {
+    background: url('../img/cabibara.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 50px 0 20px 5%;
+    position: relative;
+}
+
+/* Esmaecer a imagem de fundo */
+body::before {
+    content: "";
+    position: fixed; /* Fixa o fundo para cobrir toda a tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Mantém cobrindo toda a altura da tela */
+    background: rgba(42, 42, 42, 0.5); /* Esmaece 50% */
+    z-index: -1;
+}
+
+/* Layout principal */
+.conteudo {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    width: 75%;
+    
+}
+
+/* Box do título */
+.titulo-container {
+    background-color: rgba(42, 42, 42, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: fit-content;
+}
+
+/* Estilização do título */
+h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #fda615;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Container dos formulários */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 50%;
+    min-width: 300px;
+    margin-left: 0%;
+    
+}
+
+/* Cada bloco de formulário */
+.form-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    
+}
+
+/* Campos de entrada */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #fda615;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botão de submit */
+input[type="submit"],
+button {
+    background-color: #581957;
+    color: #d5df00;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #d5df00;
+    color: #581957;
+}
+
+/* Modal de confirmação */
 .modal {
-    display: none; /* Escondido por padrão */
+    display: none;
     position: fixed;
     z-index: 10;
     left: 0;
@@ -13,95 +125,91 @@
 }
 
 .modal-content {
-    background-color: white;
+    background: #2a2a2a;
     padding: 20px;
     border-radius: 10px;
-    text-align: center;
-}
-
-/* Container da tabela */
-.tabela-container {
-    width: 80%;
-    margin: 20px auto;
-    overflow-x: auto; /* Adiciona rolagem horizontal se necessário */
+    color: white;
 }
 
 /* Estilização da tabela */
+.tabela-container {
+    flex: 1;
+    position: fixed;
+    width: 50%;
+    margin-left: 40%;
+}
+
+.tabela-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+/* Estilo da tabela */
 .tabela-clientes {
     width: 100%;
     border-collapse: collapse;
-    text-align: left;
-    font-family: Arial, sans-serif;
 }
 
-/* Cabeçalho da tabela */
-.tabela-clientes thead {
-    background-color: #007BFF;
-    color: white;
-}
-
-/* Linhas da tabela */
 .tabela-clientes th, .tabela-clientes td {
+    border: 1px solid #fda615; /* Mesma borda dos inputs */
     padding: 10px;
-    border: 1px solid #ddd;
-}
-
-/* Alternar cores das linhas para melhorar a leitura */
-.tabela-clientes tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-/* Hover ao passar o mouse */
-.tabela-clientes tbody tr:hover {
-    background-color: #ddd;
-}
-
-/* Mensagem quando não há clientes */
-.msg-vazio {
-    text-align: center;
-    color: #888;
-    font-style: italic;
-}
-
-/* Estilo do menu de abas */
-.abas {
-    display: flex;
-    border-bottom: 2px solid #007BFF;
-    margin-bottom: 20px;
-}
-
-.aba {
-    background: #f1f1f1;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    flex: 1;
-    text-align: center;
-    font-size: 16px;
-    transition: background 0.3s;
-}
-
-.aba:hover {
-    background: #ddd;
-}
-
-/* Aba ativa */
-.aba.ativa {
-    background: #007BFF;
+    text-align: left;
     color: white;
-    font-weight: bold;
 }
 
-/* Conteúdo das abas */
-.aba-conteudo {
-    display: none;
-    padding: 20px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+/* Estilo do cabeçalho */
+.tabela-clientes th {
+    background-color: rgba(42, 42, 42, 0.8);
+    color: #fda615;
 }
 
-/* Mostrar apenas a aba ativa */
-.aba-conteudo.ativa {
-    display: block;
+/* Linhas alternadas */
+.tabela-clientes tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 📱 Responsividade */
+@media (max-width: 1024px) { /* Tablets */
+    h2 {
+        font-size: 35px;
+    }
+    body {
+        padding: 30px 5% 20px 5%;
+    }
+    .container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .conteudo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tabela-container {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) { /* Celulares grandes */
+    h2 {
+        font-size: 30px;
+    }
+    .container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) { /* Celulares pequenos */
+    h2 {
+        font-size: 25px;
+    }
+    input[type="submit"],
+    button {
+        font-size: 18px;
+        padding: 8px 15px;
+    }
 }

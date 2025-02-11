@@ -1,0 +1,115 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Fundo da página */
+body {
+    background: url('../img/cabibara.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Box do título */
+.titulo-container {
+    background-color: rgba(42, 42, 42, 0.8); /* Fundo escuro com transparência */
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Estilização do título */
+.titulo {
+    font-size: 50px;
+    font-weight: bold;
+    color: #fda615;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Container horizontal */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+    
+}
+
+/* Botões estilizados */
+.botao {
+    background-color: #581957;
+    padding: 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+    width: 250px;
+    text-align: center;
+}
+
+.botao a {
+    text-decoration: none;
+    font-size: 40px;
+    color: #d5df00;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Efeito hover */
+.botao:hover {
+    background-color: #d5df00;
+}
+
+.botao:hover a {
+    color: #581957;
+}
+
+/* 📱 Responsividade */
+@media (max-width: 1024px) { /* Tablets */
+    .titulo {
+        font-size: 40px;
+    }
+    .container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) { /* Celulares grandes */
+    .titulo {
+        font-size: 35px;
+    }
+    .botao {
+        width: 180px;
+    }
+    .botao a {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 480px) { /* Celulares pequenos */
+    .titulo {
+        font-size: 28px;
+    }
+    .botao {
+        width: 150px;
+        padding: 10px;
+    }
+    .botao a {
+        font-size: 24px;
+    }
+}
