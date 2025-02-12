@@ -36,7 +36,8 @@ body::before {
     display: flex;
     align-items: flex-start;
     gap: 50px;
-    width: 75%;
+    width: 95%;
+    
     
 }
 
@@ -63,9 +64,10 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    width: 50%;
+    width: 40%;
     min-width: 300px;
     margin-left: 0%;
+    
     
 }
 
@@ -144,16 +146,17 @@ button:hover {
 .tabelas-container {  /* Novo container para englobar todas as tabelas */
     display: flex;
     flex-direction: column;
-    width: 50%;
-    margin-left: 40%;
-    height: 40vh; /* 2 tabelas com 20% cada (40% da tela total) */
-    gap: 10px; /* Espaço entre as tabelas */
+    width: 70%;
+    margin-left: 0%;
+    height: 100vh; /* 2 tabelas com 20% cada (40% da tela total) */
+    gap: 10px; 
+    
 }
 
 /* Cada tabela ocupa 20% da tela */
 .tabela-container {
     width: 100%;
-    height: 20vh; /* 20% da altura da tela */
+    height: 40vh; /* 20% da altura da tela */
     overflow-y: auto; /* Permite rolagem se necessário */
 }
 
@@ -188,8 +191,7 @@ button:hover {
 .tabela-clientes tbody tr:nth-child(even) {
     background-color: rgba(255, 255, 255, 0.1);
     
-
-/* 📱 Responsividade */
+}
 @media (max-width: 1024px) { /* Tablets */
     h2 {
         font-size: 35px;

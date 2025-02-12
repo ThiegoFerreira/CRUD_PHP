@@ -67,7 +67,7 @@ endif; ?>
                     <label>Cliente ID:</label><br>
                     <input type="number" name="id_usuario" required><br><br>
 
-                    <h3>Itens do Pedido</h3>
+                    <h2>Itens do Pedido</h2>
                     <div id="itens-container">
                         <div class="item">
                             <label>Produto ID:</label>

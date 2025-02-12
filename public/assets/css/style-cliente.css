@@ -146,6 +146,9 @@ button:hover {
     position: fixed;
     width: 50%;
     margin-left: 40%;
+    height: 100vh;
+    
+    
 }
 
 .tabela-box {
@@ -153,6 +156,7 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     backdrop-filter: blur(5px);
+    
 }
 
 /* Estilo da tabela */
@@ -166,6 +170,8 @@ button:hover {
     padding: 10px;
     text-align: left;
     color: white;
+    max-width: 100px;
+    overflow: hidden;
 }
 
 /* Estilo do cabeçalho */
@@ -182,11 +188,13 @@ button:hover {
 /* Container das tabelas */
 .tabela-container {
     width: 50%;           /* Define uma largura para as tabelas */
-    height: 20%;          /* Define altura fixa */
+    height: 40%;          /* Define altura fixa */
     margin-left: 40%;     /* Mantém a posição */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
+
 }
 
 /* Caixa da tabela */
