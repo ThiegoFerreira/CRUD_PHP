@@ -146,7 +146,7 @@
     <link rel="stylesheet" href="../../public/assets/css/style-cliente.css">
 </head>
 <body>
-
+    <a href="../../index.php"><h2>VOLTAR</h2></a><br>
     <div class="titulo-container">
         <h2>CADASTRO DE PRODUTO</h2><br>
     </div>

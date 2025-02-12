@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_usuario'])) {
             window.location.href = venda.php;
             </script>";
 endif; ?>
-
+    <a href="../../index.php"><h2>VOLTAR</h2></a><br>
     <div class="titulo-container">
         <h2>Cadastrar Pedido</h2>
     </div>

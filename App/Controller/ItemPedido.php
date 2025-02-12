@@ -11,7 +11,7 @@ class ItemPedido {
     public float $preco_unitario;
     public float $preco_total;
 
-    public function __construct(int $pedido_id, int $produto_id, int $quantidade) {
+    public function __construct(int $pedido_id = null, int $produto_id = null, int $quantidade = null) {
         $this->pedido_id = $pedido_id;
         $this->produto_id = $produto_id;
         $this->quantidade = $quantidade;
@@ -51,7 +51,7 @@ class ItemPedido {
 
     public static function buscar_por_id($id) {
         $db = new Database('item_pedido');
-        $where = 'id_item_pedido = ' . $id;
+        $where = 'id_pedido = ' . $id;
         $res = $db->select($where)->fetchObject(self::class);
 
         if (!$res) {

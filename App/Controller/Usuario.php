@@ -6,7 +6,7 @@ class Usuario{
     public int $id_usuario;
     public string $nome;
     public string $email;
-    public string $senha;
+    public string $telefone;
 
     public function cadastrar(){
         //O comando abaixo instancia o banco e conecta com a tabela nele
@@ -17,7 +17,7 @@ class Usuario{
             [
                 'nome'=>$this->nome,
                 'email'=>$this->email,
-                'senha'=>$this->senha,
+                'telefone'=>$this->telefone,
             ]
             );
         return $res;    
@@ -44,7 +44,7 @@ class Usuario{
             [
                 "nome" => $this->nome,
                 "email" => $this->email,
-                "senha" => $this->senha,
+                "telefone" => $this->telefone,
             ]
             );
             return $res;

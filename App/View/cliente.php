@@ -6,31 +6,27 @@
 if (isset($_POST['nome'])) {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
-    $senha = $_POST['senha'];
-    $confSenha = addslashes($_POST['confSenha']);
+    $telefone = $_POST['telefone'];
 
     $usuario = new Usuario();
     $usuario->nome = $nome;
     $usuario->email = $email;
-    $usuario->senha = $senha;
+    $usuario->telefone = $telefone;
 
-    if (!empty($nome) && !empty($email) && !empty($senha) && !empty($confSenha)) {
-        if ($senha == $confSenha) {
-            if ($usuario->cadastrar()) {
-                echo "<script>
-                            alert('Cadastrado com sucesso!');
-                            window.location.href = window.location.href;
-                          </script>";
-            } else {
-                echo "<script>
-                        alert('Erro: Email já cadastrado.');
-                      </script>";
-            }
+    if (!empty($nome) && !empty($email) && !empty($telefone)) {
+        
+        if ($usuario->cadastrar()) {
+            echo "<script>
+                        alert('Cadastrado com sucesso!');
+                        window.location.href = window.location.href;
+                        </script>";
         } else {
             echo "<script>
-                    alert('Erro: As senhas não conferem.');
-                  </script>";
+                    alert('Erro ao cadastrar. Tente novamente.');
+                    </script>";
         }
+        
+    
     } else {
         echo "<script>
                 alert('Erro: Preencha todos os campos.');
@@ -44,7 +40,7 @@ if (isset($_POST['nome'])) {
 
      
     //____________________EDITAR___________________________
-$id_editar = $nome_editar = $email_editar = $senha_editar = '';
+$id_editar = $nome_editar = $email_editar = $telefone_editar = '';
 if (isset($_POST['ID_editar'])) {
     if ($_POST['acao'] == 'Procurar') {
         // Buscar os dados do usuário
@@ -56,9 +52,9 @@ if (isset($_POST['ID_editar'])) {
             $usuario->id_usuario = (int) $buscar->id_usuario;
             $nome_editar = $buscar->nome;
             $email_editar = $buscar->email;
-            $senha_editar = $buscar->senha;
+            $telefone_editar = $buscar->telefone;
         } else {
-            $nome_editar = $email_editar = $senha_editar = '';
+            $nome_editar = $email_editar = $telefone_editar = '';
         }
     }
 
@@ -67,35 +63,32 @@ if (isset($_POST['ID_editar'])) {
         $id_editar = $_POST['id_usuario_editar'];
         $nome_editar = $_POST['nome_editar'];
         $email_editar = $_POST['email_editar'];
-        $senha_editar = $_POST['senha_editar'];
-        $confSenha_editar = $_POST['confSenha_editar'];
+        $telefone_editar = $_POST['telefone_editar'];
     
         // Verifique se os campos estão preenchidos corretamente
-        if (!empty($nome_editar) && !empty($email_editar) && !empty($senha_editar) && !empty($confSenha_editar)) {
-            if ($senha_editar == $confSenha_editar) {
-                $usuario = new Usuario();
-                $usuario->id_usuario = (int) $id_editar;
-                $usuario->nome = $nome_editar;
-                $usuario->email = $email_editar;
-                $usuario->senha = $senha_editar;
+        if (!empty($nome_editar) && !empty($email_editar) && !empty($telefone_editar)) 
+        {
+            
+            $usuario = new Usuario();
+            $usuario->id_usuario = (int) $id_editar;
+            $usuario->nome = $nome_editar;
+            $usuario->email = $email_editar;
+            $usuario->telefone = $telefone_editar;
     
-                // Chame a função de atualizar
-                if ($usuario->atualizar()) {
-                    echo "<script>
-                            alert('Cadastro atualizado com sucesso!');
-                            window.location.href = window.location.href;
-                          </script>";
-                    exit();
-                } else {
-                    echo "<script>
-                            alert('Erro ao atualizar cadastro. Tente novamente.');
-                          </script>";
-                }
+            
+            if ($usuario->atualizar()) {
+                echo "<script>
+                        alert('Cadastro atualizado com sucesso!');
+                        window.location.href = window.location.href;
+                        </script>";
+                exit();
             } else {
                 echo "<script>
-                        alert('As senhas não coincidem.');
-                      </script>";
+                        alert('Erro ao atualizar cadastro. Tente novamente.');
+                        </script>";
             }
+            
+        
         } else {
             echo "<script>
                     alert('Preencha todos os campos corretamente.');
@@ -156,10 +149,9 @@ if (isset($_POST['ID_editar'])) {
                     <input type="text" name="nome" placeholder="Nome Completo."><br>
                     <label>Email:</label><br>
                     <input type="email" name="email" placeholder="Digite seu e-mail."><br>
-                    <label>Senha:</label><br>
-                    <input type="password" name="senha" placeholder="Digite sua senha."><br>
-                    <label>Confirmar Senha:</label><br>
-                    <input type="password" name="confSenha" placeholder="Confirme sua Senha"><br><br>
+                    <label>Telefone:</label><br>
+                    <input type="text" name="telefone" placeholder="Digite sua senha."><br>
+                    
                     <input type="submit" value="Cadastrar">
                 </form>
             </div>
@@ -180,11 +172,9 @@ if (isset($_POST['ID_editar'])) {
                     <label>Email:</label><br>
                     <input type="email" name="email_editar" id="" placeholder="Digite seu e-mail." value="<?php echo $email_editar; ?>"><br>
 
-                    <label>Senha:</label><br>
-                    <input type="password" name="senha_editar" id="" placeholder="Digite sua senha." value="<?php echo $senha_editar; ?>"><br>
+                    <label>Telefone:</label><br>
+                    <input type="text" name="telefone_editar" id="" placeholder="Digite sua senha." value="<?php echo $telefone_editar; ?>"><br>
 
-                    <label>Confirmar Senha:</label><br>
-                    <input type="password" name="confSenha_editar" id="" placeholder="Confirme sua Senha"><br><br>
 
                     <input type="submit" name="acao" value="Salvar Alterações"><br>
                     
@@ -220,6 +210,7 @@ if (isset($_POST['ID_editar'])) {
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Email</th>
+                            <th>Telefone</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -229,6 +220,7 @@ if (isset($_POST['ID_editar'])) {
                                     <td><?= htmlspecialchars($cliente['id_usuario']) ?></td>
                                     <td><?= htmlspecialchars($cliente['nome']) ?></td>
                                     <td><?= htmlspecialchars($cliente['email']) ?></td>
+                                    <td><?= htmlspecialchars($cliente['telefone']) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
